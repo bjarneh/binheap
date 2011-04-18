@@ -3,6 +3,17 @@
 A small binary-heap for golang with a simple interface
 
 
+<code>
+type Heapable struct {
+    Priority() int
+}
+
+if a.Priority() < b.Priority() {
+    fmt.Println(" a is more urgent than b")
+}
+</code>
+
+
 [ Install ]
 
 goinstall github.com/bjarneh/binheap
@@ -12,32 +23,39 @@ goinstall github.com/bjarneh/binheap
 
 <code>
 
-// type that fulfills interface Heapable
-
-type Job int
-
-func (j Job) Priority() int {
-    return int(j)
+type Job struct {
+    priority int
+    // probably more stuff..
 }
 
-heap := binheap.New() // or NewSize( int ) 
+func (j *Job) Priority() int {
+    return j.priority
+}
 
-heap.Add(Job(10))
-heap.Add(Job(1))
-heap.Add(Job(9))
+heap := binheap.New()
 
-mostUrgent := heap.Remove() // Job(1)
+heap.Add(&Job{4})
+heap.Add(&Job{1})
+heap.Add(&Job{10})
+.
+.
 
-// a slice of Heapable elements can be added with
+mostUrgent := heap.Remove() // Job{1}
 
-heap.AddSlice([]Job)
+// a slice of Heapable elements can be added as well
 
+var jobs []Heapable = make([]Heapable, 0)
 
-// to sort
+jobs = append(jobs, &Job{8})
+jobs = append(jobs, &Job{19})
+.
+.
 
-binheap.Sort([]Job) // will sort a slice of Jobs
+heap.AddSlice(jobs)
+
+// heap-sort, slower than sort.Sort (quick-sort)
+
+binheap.Sort(jobs) // any []Heapable slice will do
+
 
 </code>
-
-
-

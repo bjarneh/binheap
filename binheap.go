@@ -5,13 +5,16 @@
 package binheap
 
 /*
-    A small binary-heap, or priority queue.
-    To add an elements to heap it must implement 
-    the Heapable interface:
+    A small binary-heap, or priority queue with a 
+    simple interface:
 
     <pre>
     type Heapable struct {
         Priority() int
+    }
+
+    if a.Priority() < b.Priority() {
+        fmt.Println(" a is more urgent than b")
     }
     </pre>
 
@@ -19,25 +22,39 @@ package binheap
 
     <pre>
 
-    type Job int
+    type Job struct {
+        priority int
+        // probably more stuff..
+    }
 
-    func (j Job) Priority() int {
-        return int(j)
+    func (j *Job) Priority() int {
+        return j.priority
     }
 
     heap := binheap.New()
 
-    heap.Add(Job(4))
-    heap.Add(Job(1))
-    heap.Add(Job(10))
+    heap.Add(&Job{4})
+    heap.Add(&Job{1})
+    heap.Add(&Job{10})
     .
     .
 
-    mostUrgent := heap.Remove() // Job(1)
+    mostUrgent := heap.Remove() // Job{1}
 
-    // heap-sort, 1/2 speed of sort.Sort (quick-sort)
+    // a slice of Heapable elements can be added as well
 
-    binheap.Sort([]Job)
+    var jobs []Heapable = make([]Heapable, 0)
+
+    jobs = append(jobs, &Job{8})
+    jobs = append(jobs, &Job{19})
+    .
+    .
+
+    heap.AddSlice(jobs)
+
+    // heap-sort, slower than sort.Sort (quick-sort)
+
+    binheap.Sort(jobs) // any []Heapable slice will do
 
     </pre>
 
