@@ -13,7 +13,7 @@ func (i intType) Priority() int {
 // heap-sort int slice
 func SortInt(slice []int) {
 
-    heap := NewSize(len(slice)+2)
+    heap := NewSize(len(slice) + 2)
 
     for i := 0; i < len(slice); i++ {
         heap.Add(intType(slice[i]))
@@ -27,7 +27,7 @@ func SortInt(slice []int) {
 // heap-sort Heapable slice
 func Sort(slice []Heapable) {
 
-    heap := NewSize(len(slice)+2)
+    heap := NewSize(len(slice) + 2)
 
     for i := 0; i < len(slice); i++ {
         heap.Add(slice[i])

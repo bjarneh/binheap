@@ -5,7 +5,7 @@
 package binheap_test
 
 
-import(
+import (
     "rand"
     "sort"
     "testing"
@@ -96,7 +96,7 @@ func TestHeap(t *testing.T) {
         }
     }
 
-    if ! heap.Empty() {
+    if !heap.Empty() {
         t.Fatalf("heap not empty\n")
     }
 

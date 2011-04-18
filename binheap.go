@@ -5,58 +5,58 @@
 package binheap
 
 /*
-    A small binary-heap, or priority queue with a 
-    simple interface:
+   A small binary-heap, or priority queue with a 
+   simple interface:
 
-    <pre>
-    type Heapable struct {
-        Priority() int
-    }
+   <pre>
+   type Heapable struct {
+       Priority() int
+   }
 
-    if a.Priority() < b.Priority() {
-        fmt.Println(" a is more urgent than b")
-    }
-    </pre>
+   if a.Priority() < b.Priority() {
+       fmt.Println(" a is more urgent than b")
+   }
+   </pre>
 
-    Typical use:
+   Typical use:
 
-    <pre>
+   <pre>
 
-    type Job struct {
-        priority int
-        // probably more stuff..
-    }
+   type Job struct {
+       priority int
+       // probably more stuff..
+   }
 
-    func (j *Job) Priority() int {
-        return j.priority
-    }
+   func (j *Job) Priority() int {
+       return j.priority
+   }
 
-    heap := binheap.New()
+   heap := binheap.New()
 
-    heap.Add(&Job{4})
-    heap.Add(&Job{1})
-    heap.Add(&Job{10})
-    .
-    .
+   heap.Add(&Job{4})
+   heap.Add(&Job{1})
+   heap.Add(&Job{10})
+   .
+   .
 
-    mostUrgent := heap.Remove() // Job{1}
+   mostUrgent := heap.Remove() // Job{1}
 
-    // a slice of Heapable elements can be added as well
+   // a slice of Heapable elements can be added as well
 
-    var jobs []Heapable = make([]Heapable, 0)
+   var jobs []Heapable = make([]Heapable, 0)
 
-    jobs = append(jobs, &Job{8})
-    jobs = append(jobs, &Job{19})
-    .
-    .
+   jobs = append(jobs, &Job{8})
+   jobs = append(jobs, &Job{19})
+   .
+   .
 
-    heap.AddSlice(jobs)
+   heap.AddSlice(jobs)
 
-    // heap-sort, slower than sort.Sort (quick-sort)
+   // heap-sort, slower than sort.Sort (quick-sort)
 
-    binheap.Sort(jobs) // any []Heapable slice will do
+   binheap.Sort(jobs) // any []Heapable slice will do
 
-    </pre>
+   </pre>
 
 */
 
@@ -87,7 +87,7 @@ func (h *Heap) String() string {
     for i := 1; i <= h.max; i++ {
         res = fmt.Sprintf("%s %d", res, h.tree[i].Priority())
     }
-    return fmt.Sprintf("[%s ]",res)
+    return fmt.Sprintf("[%s ]", res)
 }
 
 func (h *Heap) Add(v Heapable) {
@@ -101,7 +101,7 @@ func (h *Heap) Add(v Heapable) {
 
 func (h *Heap) AddSlice(s []Heapable) {
     for i := 0; i < len(s); i++ {
-        h.Add( s[i] )
+        h.Add(s[i])
     }
 }
 
