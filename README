@@ -1,0 +1,43 @@
+[ What ]
+
+A small binary-heap for golang with a simple interface
+
+
+[ Install ]
+
+goinstall github.com/bjarneh/binheap
+
+
+[ Example ]
+
+<code>
+
+// type that fulfills interface Heapable
+
+type Job int
+
+func (j Job) Priority() int {
+    return int(j)
+}
+
+heap := binheap.New() // or NewSize( int ) 
+
+heap.Add(Job(10))
+heap.Add(Job(1))
+heap.Add(Job(9))
+
+mostUrgent := heap.Remove() // Job(1)
+
+// a slice of Heapable elements can be added with
+
+heap.AddSlice([]Job)
+
+
+// to sort
+
+binheap.Sort([]Job) // will sort a slice of Jobs
+
+</code>
+
+
+
