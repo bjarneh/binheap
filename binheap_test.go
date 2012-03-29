@@ -6,7 +6,7 @@ package binheap_test
 
 
 import (
-	"rand"
+	"math/rand"
 	"sort"
 	"testing"
 	. "github.com/bjarneh/binheap"
